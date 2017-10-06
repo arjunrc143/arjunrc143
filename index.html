@@ -1,0 +1,89 @@
+<html>
+	<head>
+		<title>Registration Form</title>
+		<script>  
+			function validateform(){  
+				var name=document.regform.name.value;  
+				var gender=document.regform.gender.value;  
+				var ccode=document.regform.ccode.value;
+				var mobile=document.regform.mobile.value;
+				var email=document.regform.email.value;
+				var emfilter = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
+				var phfilter= /^(\+91-|\+91|0)?\d{10}$/;
+				var nafilter= /^[a-zA-Z ]{2,30}$/;
+				var flag=true;
+				
+				if(name==""){
+					alert("Name Cannot Be Blank");
+					return false;
+				}else{
+					if (!nafilter.test(name)) {
+						alert('Please provide a valid Name');
+						return false;
+					}
+				}
+				if(gender==""){
+					alert("Gender Cannot Be Blank");
+					return false;
+				}
+				if(ccode==""){
+					alert("Ccode Cannot Be Blank");
+					return false;
+				}
+				if(mobile==""){
+					alert("Mobile Cannot Be Blank");
+					return false;
+				}else{
+					if (!phfilter.test(mobile)) {
+						alert('Please provide a valid mobile number');
+						return false;
+					}
+				}
+				if(email==""){
+					alert("Email Cannot Be Blank");		
+					return false;
+				}else{
+					if (!emfilter.test(email)) {
+						alert('Please provide a valid email address');
+						
+						return false;
+					}
+				}
+				
+				if(flag==true){
+					document.getElementById('display').innerHTML = "</br>Name: "+name+"</br>Gender: "+gender+"</br>Country Code: "+ccode+"</br>Mobile: "+mobile+"</br>Email: "+email+"</br></br>";
+					document.getElementById('button').style.visibility="visible";
+					return false;
+				}								
+		}  				
+		
+		function reseting(){
+			location.reload();
+		}
+		
+</script> 
+	</head>
+	<body>
+		<center><h1 style=color:Red;>Registration Form</h1></center>
+		<div>
+		<form name="regform" onsubmit="return validateform()" method="POST">
+			<label style=color:red;>Name:</label><input type="text" name="name" placeholder="Name" /></br></br>
+			<label style=color:red;>Gender:</label><input type="radio" name="gender" value="Male"/>Male &nbsp <input type="radio" name="gender" value="Female" /> Female &nbsp </br> </br>
+			<label style=color:red;>Country Code:</label> <select name="ccode">
+															<option value="+91">India</option>
+															<option value="+1">US</option>
+															<option value="+87">Dubai</option>
+														  </select></br></br>
+			<label style=color:red;>Mobile:</label><input  name="mobile" type="tel" size=10 placeholder="9999999999"/></br></br> 
+			<label style=color:red;>Email:</label><input  name="email" type="email"  placeholder="abc@xyz.ij"/></br></br>  
+			<input type="submit"/>
+		</form>
+		</div>
+		<div>
+			<span id="display"></span>
+		</div>
+	
+		<button id="button" style=visibility:hidden; onclick="return reseting()">Reset</button>
+		
+	</body>
+</html>
